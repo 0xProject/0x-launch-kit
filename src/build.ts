@@ -29,6 +29,9 @@ export const buildDockerComposeYml = (options: BuildOptions) => {
     const basePath = options.tokenType === 'ERC20' ? '/erc20' : '/erc721';
     const theme = options.theme === 'light' ? 'LIGHT_THEME' : 'DARK_THEME';
 
+    const isGanache = options.network === 'ganache';
+    const collectiblesSource = isGanache ? 'mocked' : 'opensea';
+
     const networkId = getNetworkId(options.network);
 
     const ganacheService = `
@@ -39,12 +42,13 @@ export const buildDockerComposeYml = (options: BuildOptions) => {
 
     return `
 version: "3"
-services:${options.network === 'ganache' ? ganacheService : ''}
+services:${isGanache ? ganacheService : ''}
   frontend:
     image: 0xorg/launch-kit-frontend
     environment:
       REACT_APP_DEFAULT_BASE_PATH: '${basePath}'
       REACT_APP_THEME_NAME: '${theme}'
+      REACT_APP_COLLECTIBLES_SOURCE: '${collectiblesSource}'
       REACT_APP_RELAYER_URL: 'http://localhost:3000/v2'
     command: yarn build
     volumes:
