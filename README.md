@@ -1,6 +1,6 @@
 <img src="launch_kit_banner.png">
 
-# Launch An Exchange in Under a Minute 🚀📈
+# 0x Launch Kit: Launch An Exchange in Under a Minute 🚀📈
 
 ## Quick Start
 
@@ -8,7 +8,7 @@
 
 Need help or have questions? [Join our Discord](https://discordapp.com/invite/Xv45HzV)
 
-## [Live Demo](https://demo.0x.org/erc20/)
+### [Live Demo](https://demo.0x.org/erc20/)
 
 #### Pre-requirements
 
@@ -16,6 +16,7 @@ Need help or have questions? [Join our Discord](https://discordapp.com/invite/Xv
 -   [Yarn](https://yarnpkg.com/en/) > v1.x
 -   [Docker](https://docs.docker.com/compose/install/)
 
+1. Run the wizard, load the Docker image, and open your browser!
 ```
 npx @0x/0x-launch-kit-wizard && docker-compose up && open http://localhost:3001
 ```
