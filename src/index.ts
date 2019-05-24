@@ -3,24 +3,9 @@
 import * as fs from 'fs';
 import * as inquirer from 'inquirer';
 
-import { buildDockerComposeYml, BuildOptions } from './build';
-
-type Network = 'mainnet' | 'kovan' | 'ropsten' | 'custom';
+import { buildDockerComposeYml, BuildOptions, Network } from './build';
 
 const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
-
-function getNetworkId(network: Network): number {
-    switch (network) {
-        case 'mainnet':
-            return 1;
-        case 'kovan':
-            return 42;
-        case 'ropsten':
-            return 3;
-        case 'custom':
-            return 50;
-    }
-}
 
 function getRpcUrl(network: Network): string {
     switch (network) {
@@ -30,6 +15,8 @@ function getRpcUrl(network: Network): string {
             return 'https://kovan.infura.io/';
         case 'ropsten':
             return 'https://ropsten.infura.io/';
+        case 'ganache':
+            return 'http://ganache:8545/';
         case 'custom':
             return 'http://localhost:8545/';
     }
@@ -50,7 +37,11 @@ async function main() {
             value: 'ropsten',
         },
         {
-            name: 'Local / Custom',
+            name: 'Ganache',
+            value: 'ganache',
+        },
+        {
+            name: 'Custom',
             value: 'custom',
         },
     ];
@@ -78,6 +69,7 @@ async function main() {
             validate: (rpcUrl: string) => {
                 return /https?:\/\/.+/.test(rpcUrl) ? true : 'Please enter a valid URL';
             },
+            when: (answers: any) => answers.network !== 'ganache',
         },
         {
             type: 'input',
@@ -128,12 +120,12 @@ async function main() {
         },
     ]);
 
-    const networkId = getNetworkId(answers.network);
+    const rpcUrl = answers.network === 'ganache' ? 'http://ganache:8545' : answers.rpcUrl;
 
     const options: BuildOptions = {
         tokenType: answers.tokenType,
-        networkId,
-        rpcUrl: answers.rpcUrl,
+        network: answers.network,
+        rpcUrl,
         feeRecipient: answers.feeRecipient || ZERO_ADDRESS,
         theme: answers.theme,
         port: answers.port,

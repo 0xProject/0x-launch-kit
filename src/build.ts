@@ -1,6 +1,8 @@
+export type Network = 'mainnet' | 'kovan' | 'ropsten' | 'ganache' | 'custom';
+
 export interface BuildOptions {
     tokenType: 'ERC20' | 'ERC721';
-    networkId: number;
+    network: Network;
     rpcUrl: string;
     feeRecipient: string;
     theme: 'light' | 'dark';
@@ -9,17 +11,35 @@ export interface BuildOptions {
     takerFee: number;
 }
 
+function getNetworkId(network: Network): number {
+    switch (network) {
+        case 'mainnet':
+            return 1;
+        case 'kovan':
+            return 42;
+        case 'ropsten':
+            return 3;
+        case 'ganache':
+        case 'custom':
+            return 50;
+    }
+}
+
 export const buildDockerComposeYml = (options: BuildOptions) => {
     const basePath = options.tokenType === 'ERC20' ? '/erc20' : '/erc721';
     const theme = options.theme === 'light' ? 'LIGHT_THEME' : 'DARK_THEME';
 
-    return `
-version: "3"
-services:
+    const networkId = getNetworkId(options.network);
+
+    const ganacheService = `
   ganache:
     image: fvictorio/0x-ganache-testing:0.0.1
     ports:
-      - "8545:8545"
+      - "8545:8545"`;
+
+    return `
+version: "3"
+services:${options.network === 'ganache' ? ganacheService : ''}
   frontend:
     image: 0xorg/launch-kit-frontend
     environment:
@@ -34,7 +54,7 @@ services:
     environment:
         HTTP_PORT: '3000'
         RPC_URL: '${options.rpcUrl}'
-        NETWORK_ID: '${options.networkId}'
+        NETWORK_ID: '${networkId}'
         WHITELIST_ALL_TOKENS: 'true'
         FEE_RECIPIENT: '${options.feeRecipient}'
         MAKER_FEE_ZRX_UNIT_AMOUNT: '${options.makerFee}'
