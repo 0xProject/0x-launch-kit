@@ -137,8 +137,8 @@ async function main() {
         feeRecipient: answers.feeRecipient || ZERO_ADDRESS,
         theme: answers.theme,
         port: answers.port,
-        makerFee: answers.makerFee,
-        takerFee: answers.takerFee,
+        makerFee: answers.makerFee || 0,
+        takerFee: answers.takerFee || 0,
     };
 
     const dockerComposeYml = buildDockerComposeYml(options);
