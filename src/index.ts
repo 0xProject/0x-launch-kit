@@ -135,7 +135,9 @@ async function main() {
 
     const dockerComposeYml = buildDockerComposeYml(options);
 
-    fs.writeFileSync('docker-compose.yml', dockerComposeYml);
+    const composeFilePath = process.argv[2] || 'docker-compose.yml';
+
+    fs.writeFileSync(composeFilePath, dockerComposeYml);
 }
 
 main();
