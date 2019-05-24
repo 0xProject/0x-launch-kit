@@ -1,5 +1,10 @@
 <img src="launch_kit_banner.png">
 
+## Quick Start
+```
+npx @0x/0x-launch-kit-wizard
+```
+
 ## Table of contents
 
 -   [Introduction](#introduction)
