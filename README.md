@@ -1,8 +1,18 @@
 <img src="launch_kit_banner.png">
 
 ## Quick Start
+
+#### Pre-requirements
+
+-   [Node.js](https://nodejs.org/en/download/) > v8.x
+-   [Yarn](https://yarnpkg.com/en/) > v1.x
+-   [Docker](https://docs.docker.com/compose/install/)
+    
+[Instructions for using Launch Kit with Ganache](https://hackmd.io/-rC79gYWRyG7h6M9jUf5qA)
+
 ```
 npx @0x/0x-launch-kit-wizard
+docker-compose up
 ```
 
 ## Table of contents
