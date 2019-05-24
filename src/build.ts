@@ -33,7 +33,7 @@ export const buildDockerComposeYml = (options: BuildOptions) => {
 
     const ganacheService = `
   ganache:
-    image: fvictorio/0x-ganache-testing:0.0.1
+    image: 0xorg/ganache-cli
     ports:
       - "8545:8545"`;
 
