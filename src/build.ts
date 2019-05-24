@@ -21,7 +21,7 @@ services:
     ports:
       - "8545:8545"
   frontend:
-    image: fvictorio/0x-launch-kit-frontend
+    image: 0xorg/launch-kit-frontend
     environment:
       REACT_APP_DEFAULT_BASE_PATH: '${basePath}'
       REACT_APP_THEME_NAME: '${theme}'
