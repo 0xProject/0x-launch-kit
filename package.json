@@ -1,0 +1,26 @@
+{
+    "name": "0x-launch-kit",
+    "version": "0.0.1",
+    "description": "",
+    "bin": {
+        "create-launch-kit-app": "./lib/index.js"
+    },
+    "files": [
+        "lib/**/*"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "prepublishOnly": "npm run build",
+        "prettier": "prettier --write '**/*.{ts,tsx,json,md}' --config .prettierrc"
+    },
+    "author": "",
+    "license": "Apache-2.0",
+    "devDependencies": {
+        "@types/inquirer": "^6.0.2",
+        "prettier": "^1.17.1",
+        "typescript": "^3.4.5"
+    },
+    "dependencies": {
+        "inquirer": "^6.3.1"
+    }
+}
