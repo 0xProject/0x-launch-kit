@@ -9,6 +9,7 @@ export interface BuildOptions {
     port: number;
     makerFee: number;
     takerFee: number;
+    collectibleAddress: string;
 }
 
 function getNetworkId(network: Network): number {
@@ -49,6 +50,7 @@ services:${isGanache ? ganacheService : ''}
       REACT_APP_DEFAULT_BASE_PATH: '${basePath}'
       REACT_APP_THEME_NAME: '${theme}'
       REACT_APP_COLLECTIBLES_SOURCE: '${collectiblesSource}'
+      REACT_APP_COLLECTIBLE_ADDRESS: '${options.collectibleAddress}'
       REACT_APP_RELAYER_URL: 'http://localhost:3000/v2'
     command: yarn build
     volumes:

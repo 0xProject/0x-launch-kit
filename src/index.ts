@@ -7,6 +7,8 @@ import { buildDockerComposeYml, BuildOptions, Network } from './build';
 
 const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 
+const mockERC721Address = '0x07f96aa816c1f244cbc6ef114bb2b023ba54a2eb';
+
 function getRpcUrl(network: Network): string {
     switch (network) {
         case 'mainnet':
@@ -21,6 +23,8 @@ function getRpcUrl(network: Network): string {
             return 'http://localhost:8545/';
     }
 }
+
+const isAddress = (s: string) => /(0x)?[0-9a-fA-F]{40}/.test(s);
 
 async function main() {
     const networkChoices: Array<{ name: string; value: Network }> = [
@@ -73,11 +77,21 @@ async function main() {
         },
         {
             type: 'input',
+            name: 'collectibleAddress',
+            message: 'Enter the address of the collectible:',
+            default: ZERO_ADDRESS,
+            validate: (answer: string) => {
+                return isAddress(answer) ? true : 'Please enter a valid address';
+            },
+            when: (answers: any) => answers.tokenType === 'ERC721' && answers.network !== 'ganache',
+        },
+        {
+            type: 'input',
             name: 'feeRecipient',
             message: 'Enter the fee recipient:',
             default: ZERO_ADDRESS,
             validate: (answer: string) => {
-                return /(0x)?[0-9a-fA-F]{40}/.test(answer) ? true : 'Please enter a valid address';
+                return isAddress(answer) ? true : 'Please enter a valid address';
             },
         },
         {
@@ -131,6 +145,7 @@ async function main() {
         port: answers.port,
         makerFee: answers.makerFee || 0,
         takerFee: answers.takerFee || 0,
+        collectibleAddress: answers.collectibleAddress || mockERC721Address,
     };
 
     const dockerComposeYml = buildDockerComposeYml(options);
