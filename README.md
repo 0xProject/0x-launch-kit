@@ -22,7 +22,7 @@ Need help or have questions? [Join our Discord](https://discordapp.com/invite/Xv
 1. Run the wizard and load the Docker image
 
 ```
-npx @0x/0x-launch-kit-wizard && docker-compose up
+npx @0x/launch-kit-wizard && docker-compose up
 ```
 
 2. When Docker is done loading, open your browser to check out your new exchange. It will be running at the port you specified in the wizard (default is http://localhost:3001/)
