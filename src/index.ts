@@ -49,8 +49,7 @@ const zeroExAsciiArt = `
 ............................................................
 ............................................................
 ............................................................
-............................................................`                 
-                                                              
+............................................................`
 
 function getRpcUrl(network: Network): string {
     switch (network) {
@@ -100,7 +99,7 @@ async function main() {
             message: zeroExAsciiArt + `\n\n\n
             🚀 Welcome to the 0x Launch Kit Wizard! 🚀 \n
             Start your own exchange in under a minute
-            
+
             ----------------------------------------------------------------
 
             Select the kind of token you want to support on your exchange`,
@@ -132,6 +131,21 @@ async function main() {
             validate: (answer: string) => {
                 return isAddress(answer) ? true : 'Please enter a valid address';
             },
+            when: (answers: any) => answers.tokenType === 'ERC721' && answers.network !== 'ganache',
+        },
+        {
+            type: 'input',
+            name: 'collectibleName',
+            message: 'Enter the name of the collectible:',
+            validate: (answer: string) => {
+                return answer.length > 0 ? true : 'Please enter a name';
+            },
+            when: (answers: any) => answers.tokenType === 'ERC721' && answers.network !== 'ganache',
+        },
+        {
+            type: 'input',
+            name: 'collectibleDescription',
+            message: 'Enter the description of the collectible (optional):',
             when: (answers: any) => answers.tokenType === 'ERC721' && answers.network !== 'ganache',
         },
         {
@@ -202,6 +216,8 @@ async function main() {
         makerFee: answers.makerFee || 0,
         takerFee: answers.takerFee || 0,
         collectibleAddress: answers.collectibleAddress || mockERC721Address,
+        collectibleName: answers.collectibleName || '',
+        collectibleDescription: answers.collectibleDescription || '',
     };
 
     const dockerComposeYml = buildDockerComposeYml(options);
