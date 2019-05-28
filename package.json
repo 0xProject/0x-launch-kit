@@ -11,7 +11,8 @@
     "scripts": {
         "build": "tsc",
         "prepublishOnly": "npm run build",
-        "prettier": "prettier --write '**/*.{ts,tsx,json,md}' --config .prettierrc"
+        "prettier": "prettier --write '**/*.{ts,tsx,json,md}' --config .prettierrc",
+        "start": "node ./lib/index.js && docker-compose up"
     },
     "author": "",
     "license": "Apache-2.0",
