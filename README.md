@@ -1,10 +1,10 @@
-<img src="launch_kit_banner.png">
+<img src="https://s3.eu-west-2.amazonaws.com/0x-wiki-images/launch_kit_banner.png">
 
 # 0x Launch Kit: Build an Exchange in Under a Minute 🚀📈
 
-|     ERC-20     |     ERC-721     |
-| :------------: | :-------------: |
-| ![](erc20.png) | ![](erc721.png) |
+|                              ERC-20                              |                              ERC-721                              |
+| :--------------------------------------------------------------: | :---------------------------------------------------------------: |
+| ![](https://s3.eu-west-2.amazonaws.com/0x-wiki-images/erc20.png) | ![](https://s3.eu-west-2.amazonaws.com/0x-wiki-images/erc721.png) |
 
 ## Quick Start
 
