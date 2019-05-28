@@ -50,7 +50,7 @@ Launch Kit is split into two separate repos:
 
 This repo contains a Docker image that will run both codebases simultaneously for easy deployment, but you can also clone or fork each repo independently.
 
-### [See website](https://0xproject.com/launch-kit)
+### [See website](https://0x.org/launch-kit)
 
 ## Language choice
 
