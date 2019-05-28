@@ -1,4 +1,4 @@
-<img src="launch_kit_banner.png">
+<img src="launch-kit-banner.png">
 
 # 0x Launch Kit: Build an Exchange in Under a Minute 🚀📈
 
