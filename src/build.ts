@@ -10,6 +10,8 @@ export interface BuildOptions {
     makerFee: number;
     takerFee: number;
     collectibleAddress: string;
+    collectibleName: string;
+    collectibleDescription: string;
 }
 
 function getNetworkId(network: Network): number {
@@ -51,6 +53,8 @@ services:${isGanache ? ganacheService : ''}
       REACT_APP_THEME_NAME: '${theme}'
       REACT_APP_COLLECTIBLES_SOURCE: '${collectiblesSource}'
       REACT_APP_COLLECTIBLE_ADDRESS: '${options.collectibleAddress}'
+      REACT_APP_COLLECTIBLE_NAME: '${options.collectibleName}'
+      REACT_APP_COLLECTIBLE_DESCRIPTION: '${options.collectibleDescription}'
       REACT_APP_RELAYER_URL: 'http://localhost:3000/v2'
     command: yarn build
     volumes:
