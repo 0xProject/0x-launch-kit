@@ -1,5 +1,3 @@
-<img src="launch-kit-banner.png">
-
 # 0x Launch Kit: Build an Exchange in Under a Minute 🚀📈
 
 |     ERC-20     |     ERC-721     |
