@@ -2,13 +2,13 @@
 
 # 0x Launch Kit: Build an Exchange in Under a Minute 🚀📈
 
-ERC-20            |  ERC-721
-:-------------------------:|:-------------------------:
-![](erc20.png)  |  ![](erc721.png)
+|     ERC-20     |     ERC-721     |
+| :------------: | :-------------: |
+| ![](erc20.png) | ![](erc721.png) |
 
 ## Quick Start
 
-0x Launch Kit is the easiest way to create your own 0x-based cryptoasset exchange. Use one of our beautifully-crafted UIs as is, edit one to you meet your needs, or build your own, all using our professionally-engineered backend to manage, validate, and serve 0x orders.
+0x Launch Kit is the easiest way to create your own 0x-based cryptoasset exchange. Use one of our beautifully-crafted UIs as is, edit one to meet your needs, or build your own, all using our professionally-engineered backend to manage, validate, and serve 0x orders.
 
 Need help or have questions? [Join our Discord](https://discordapp.com/invite/Xv45HzV)
 
@@ -19,8 +19,10 @@ Need help or have questions? [Join our Discord](https://discordapp.com/invite/Xv
 -   [Node.js](https://nodejs.org/en/download/) > v8.x
 -   [Yarn](https://yarnpkg.com/en/) > v1.x
 -   [Docker](https://docs.docker.com/compose/install/)
+-   [npx](https://www.npmjs.com/package/npx)
 
 1. Run the wizard and load the Docker image
+
 ```
 npx @0x/0x-launch-kit-wizard && docker-compose up
 ```
@@ -44,6 +46,7 @@ Launch a 0x relayer in under a minute with Launch Kit. This repository contains 
 -   Enable trading of any ERC-20 or ERC-721 asset
 
 Launch Kit is split into two separate repos:
+
 -   **[0x Launch Kit Frontend](https://github.com/0xProject/0x-launch-kit-frontend)**: ERC-20 and ERC-721 relayer UIs
 -   **[0x Launch Kit Backend](https://github.com/0xProject/0x-launch-kit-backend)**: 0x relayer server, API, and database that powers Launch Kit
 
