@@ -10,7 +10,9 @@
 
 Need help or have questions? [Join our Discord](https://discordapp.com/invite/Xv45HzV)
 
-### [Live Demo](https://demo.0x.org/erc20/)
+### [ERC-20 Live Kovan Demo](https://demo.0x.org/erc20/)
+
+### [ERC-721 Live Mainnet Demo](https://demo.0x.org/marketplace)
 
 #### Pre-requirements
 
