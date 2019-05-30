@@ -56,9 +56,11 @@ services:${isGanache ? ganacheService : ''}
       REACT_APP_COLLECTIBLE_NAME: '${options.collectibleName}'
       REACT_APP_COLLECTIBLE_DESCRIPTION: '${options.collectibleDescription}'
       REACT_APP_RELAYER_URL: 'http://localhost:3000/v2'
-    command: yarn build
+    command: bash -c 'cp templates/building.html production-build/index.html && yarn build && cp -a build/. production-build'
     volumes:
-        - frontend-assets:/app/build
+        - frontend-assets:/app/production-build
+    depends_on:
+        - nginx
   backend:
     image: 0xorg/launch-kit-backend
     environment:
