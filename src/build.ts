@@ -60,7 +60,7 @@ services:${isGanache ? ganacheService : ''}
     volumes:
         - frontend-assets:/app/build
   backend:
-    image: 0xorg/launch-kit-backend
+    image: 0xbitcoin-exchange/0x-launch-kit-backend
     environment:
         HTTP_PORT: '3000'
         RPC_URL: '${options.rpcUrl}'
