@@ -35,6 +35,7 @@ npx @0x/launch-kit-wizard && docker-compose up
 
 -   [Introduction](#introduction)
 -   [Language choice](#language-choice)
+-   [Frequently Asked Questions](#frequently-asked-questions)
 -   [Legal Disclaimer](#legal-disclaimer)
 
 ## Introduction
@@ -59,6 +60,9 @@ This repo contains a Docker image that will run both codebases simultaneously fo
 `0x-launch-kit-backend` ships with 2 codebases, one in Typescript and another in Javascript. Although the Javascript is auto-generated from the Typescript, we made sure the Javascript generated is readable.
 
 `0x-launch-kit-frontend` ship with just a TypeScript codebase and uses React + Thunk to create and manage the UI.
+
+## Frequently Asked Questions
+For solutions to frequently asked questions, please read through the [FAQ](https://github.com/0xProject/0x-launch-kit/wiki/FAQ)
 
 ## Legal Disclaimer
 
