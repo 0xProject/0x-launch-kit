@@ -49,7 +49,7 @@ const zeroExAsciiArt = `
 ............................................................
 ............................................................
 ............................................................
-............................................................`
+............................................................`;
 
 function getRpcUrl(network: Network): string {
     switch (network) {
@@ -96,7 +96,9 @@ async function main() {
         {
             type: 'list',
             name: 'tokenType',
-            message: zeroExAsciiArt + `\n\n\n
+            message:
+                zeroExAsciiArt +
+                `\n\n\n
             🚀 Welcome to the 0x Launch Kit Wizard! 🚀 \n
             Start your own exchange in under a minute
 
@@ -122,6 +124,15 @@ async function main() {
                 return /https?:\/\/.+/.test(rpcUrl) ? true : 'Please enter a valid URL';
             },
             when: (answers: any) => answers.network !== 'ganache',
+        },
+        {
+            type: 'input',
+            name: 'relayerUrl',
+            message: 'Select the URL for the Relayer you want to use',
+            default: 'http://localhost:3000/v2',
+            validate: (rpcUrl: string) => {
+                return /https?:\/\/.+/.test(rpcUrl) ? true : 'Please enter a valid URL';
+            },
         },
         {
             type: 'input',
@@ -195,14 +206,18 @@ async function main() {
                 return 1 <= port && port <= 65535 ? true : 'Enter a port between 1 and 65535';
             },
         },
-    ])
+    ]);
 
-    console.log(`
+    console.log(
+        `
     Wizard complete.
 
     🚀🚀🚀🚀 .... Preparing for liftoff .... 🚀🚀🚀🚀
 
-    Run << docker-compose up >> and open your browser to http://localhost:` + answers.port + `\n\n\n\n\n`);
+    Run << docker-compose up >> and open your browser to http://localhost:` +
+            answers.port +
+            `\n\n\n\n\n`,
+    );
 
     const rpcUrl = answers.network === 'ganache' ? 'http://ganache:8545' : answers.rpcUrl;
 
@@ -210,6 +225,7 @@ async function main() {
         tokenType: answers.tokenType,
         network: answers.network,
         rpcUrl,
+        relayerUrl: answers.relayerUrl,
         feeRecipient: answers.feeRecipient || ZERO_ADDRESS,
         theme: answers.theme,
         port: answers.port,
