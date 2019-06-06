@@ -76,6 +76,8 @@ services:${isGanache ? ganacheService : ''}
         TAKER_FEE_ZRX_UNIT_AMOUNT: '${options.takerFee}'
     ports:
       - '3000:3000'
+    volumes:
+      - backend-database:/usr/src/app/database.sqlite
   nginx:
     image: nginx
     ports:
@@ -84,5 +86,6 @@ services:${isGanache ? ganacheService : ''}
         - frontend-assets:/usr/share/nginx/html
 volumes:
     frontend-assets:
+    backend-database:
 `.trimLeft();
 };
