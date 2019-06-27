@@ -57,6 +57,7 @@ services:${isGanache ? ganacheService : ''}
       REACT_APP_COLLECTIBLE_DESCRIPTION: '${options.collectibleDescription}'
       REACT_APP_NETWORK_ID: '${networkId}'
       REACT_APP_RELAYER_URL: 'http://localhost:3000/v2'
+      REACT_APP_NETWORK_ID: ${networkId}
     command: yarn build
     volumes:
         - frontend-assets:/app/build
