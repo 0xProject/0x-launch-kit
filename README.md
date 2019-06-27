@@ -30,7 +30,7 @@ npx @0x/launch-kit-wizard && docker-compose up
 2. When Docker is done loading, open your browser to check out your new exchange. It will be running at the port you specified in the wizard (default is http://localhost:3001/)
 
 [Instructions for using Launch Kit with Ganache](https://hackmd.io/-rC79gYWRyG7h6M9jUf5qA)  
-[Instructions for deploying to AWS](https://github.com/0xProject/0x-launch-kit/wiki/FAQ#aws)  
+[Instructions for deploying to AWS](https://github.com/0xProject/0x-launch-kit/wiki/FAQ#aws)
 
 ## Table of contents
 
@@ -63,6 +63,7 @@ This repo contains a Docker image that will run both codebases simultaneously fo
 `0x-launch-kit-frontend` ship with just a TypeScript codebase and uses React + Thunk to create and manage the UI.
 
 ## Frequently Asked Questions
+
 For solutions to frequently asked questions, please read through the [FAQ](https://github.com/0xProject/0x-launch-kit/wiki/FAQ)
 
 ## Legal Disclaimer
