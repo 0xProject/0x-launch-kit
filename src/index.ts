@@ -128,7 +128,8 @@ async function main() {
         {
             type: 'input',
             name: 'relayerUrl',
-            message: 'Select the URL for the Relayer you want to use',
+            message:
+                'Launch Kit will create a backend Relayer. Enter the public URL for the backend Relayer or leave default:',
             default: 'http://localhost:3000/v2',
             validate: (rpcUrl: string) => {
                 return /https?:\/\/.+/.test(rpcUrl) ? true : 'Please enter a valid URL';
@@ -200,7 +201,7 @@ async function main() {
         {
             type: 'number',
             name: 'port',
-            message: 'Enter the port for the server:',
+            message: 'Enter the port for the frontend server:',
             default: 3001,
             validate: (port: number) => {
                 return 1 <= port && port <= 65535 ? true : 'Enter a port between 1 and 65535';
