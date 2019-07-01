@@ -62,6 +62,9 @@ This repo contains a Docker image that will run both codebases simultaneously fo
 
 `0x-launch-kit-frontend` ship with just a TypeScript codebase and uses React + Thunk to create and manage the UI.
 
+## Windows
+Note some installations of Docker on windows don't support forwarding `localhost` to the Docker VM. You may be required to update references of `localhost` to `192.168.99.100` or the `docker-machine ip` equivalent. These values should be replaced during the Wizard prompts and when navigating to the frontend website.
+
 ## Frequently Asked Questions
 
 For solutions to frequently asked questions, please read through the [FAQ](https://github.com/0xProject/0x-launch-kit/wiki/FAQ)
