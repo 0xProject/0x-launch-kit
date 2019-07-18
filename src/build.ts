@@ -4,6 +4,7 @@ export interface BuildOptions {
     tokenType: 'ERC20' | 'ERC721';
     network: Network;
     rpcUrl: string;
+    relayerUrl: string;
     feeRecipient: string;
     theme: 'light' | 'dark';
     port: number;
@@ -42,6 +43,12 @@ export const buildDockerComposeYml = (options: BuildOptions) => {
     image: 0xorg/ganache-cli
     ports:
       - "8545:8545"`;
+    const collectibleEnv = `
+      REACT_APP_COLLECTIBLES_SOURCE: '${collectiblesSource}'
+      REACT_APP_COLLECTIBLE_ADDRESS: '${options.collectibleAddress}'
+      REACT_APP_COLLECTIBLE_NAME: '${options.collectibleName}'
+      REACT_APP_COLLECTIBLE_DESCRIPTION: '${options.collectibleDescription}'
+    `.trimLeft();
 
     return `
 version: "3"
@@ -49,14 +56,11 @@ services:${isGanache ? ganacheService : ''}
   frontend:
     image: 0xorg/launch-kit-frontend
     environment:
+      REACT_APP_RELAYER_URL: '${options.relayerUrl}'
       REACT_APP_DEFAULT_BASE_PATH: '${basePath}'
       REACT_APP_THEME_NAME: '${theme}'
-      REACT_APP_COLLECTIBLES_SOURCE: '${collectiblesSource}'
-      REACT_APP_COLLECTIBLE_ADDRESS: '${options.collectibleAddress}'
-      REACT_APP_COLLECTIBLE_NAME: '${options.collectibleName}'
-      REACT_APP_COLLECTIBLE_DESCRIPTION: '${options.collectibleDescription}'
-      REACT_APP_NETWORK_ID: '${networkId}'
-      REACT_APP_RELAYER_URL: 'http://localhost:3000/v2'
+      REACT_APP_NETWORK_ID: ${networkId}
+      ${options.tokenType === 'ERC20' ? '' : collectibleEnv}
     command: yarn build
     volumes:
         - frontend-assets:/app/build
