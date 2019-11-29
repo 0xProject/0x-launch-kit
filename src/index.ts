@@ -59,6 +59,8 @@ function getRpcUrl(network: Network): string {
             return 'https://kovan.infura.io/';
         case 'ropsten':
             return 'https://ropsten.infura.io/';
+        case 'rinkeby':
+            return 'https://rinkeby.infura.io/';
         case 'ganache':
             return 'http://ganache:8545/';
         case 'custom':
@@ -81,6 +83,10 @@ async function main() {
         {
             name: 'Ropsten',
             value: 'ropsten',
+        },
+        {
+            name: 'Rinkeby',
+            value: 'rinkeby',
         },
         {
             name: 'Ganache',
@@ -130,7 +136,7 @@ async function main() {
             name: 'relayerUrl',
             message:
                 'Launch Kit will create a backend Relayer. Enter the public URL for the backend Relayer or leave default:',
-            default: 'http://localhost:3000/v2',
+            default: 'http://localhost:3000/v3',
             validate: (rpcUrl: string) => {
                 return /https?:\/\/.+/.test(rpcUrl) ? true : 'Please enter a valid URL';
             },

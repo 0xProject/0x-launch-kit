@@ -1,4 +1,4 @@
-export type Network = 'mainnet' | 'kovan' | 'ropsten' | 'ganache' | 'custom';
+export type Network = 'mainnet' | 'kovan' | 'ropsten' | 'rinkeby' | 'ganache' | 'custom';
 
 export interface BuildOptions {
     tokenType: 'ERC20' | 'ERC721';
@@ -23,9 +23,24 @@ function getNetworkId(network: Network): number {
             return 42;
         case 'ropsten':
             return 3;
+        case 'rinkeby':
+            return 4;
         case 'ganache':
         case 'custom':
             return 50;
+    }
+}
+
+function getChainId(network: Network): number {
+    switch (network) {
+        case 'mainnet':
+        case 'kovan':
+        case 'rinkeby':
+        case 'ropsten':
+            return getNetworkId(network);
+        case 'ganache':
+        case 'custom':
+            return 1337;
     }
 }
 
@@ -37,6 +52,7 @@ export const buildDockerComposeYml = (options: BuildOptions) => {
     const collectiblesSource = isGanache ? 'mocked' : 'opensea';
 
     const networkId = getNetworkId(options.network);
+    const chainId = getChainId(options.network);
 
     const ganacheService = `
   ganache:
@@ -54,28 +70,46 @@ export const buildDockerComposeYml = (options: BuildOptions) => {
 version: "3"
 services:${isGanache ? ganacheService : ''}
   frontend:
-    image: 0xorg/launch-kit-frontend
+    image: 0xorg/launch-kit-frontend:v3
     environment:
       REACT_APP_RELAYER_URL: '${options.relayerUrl}'
       REACT_APP_DEFAULT_BASE_PATH: '${basePath}'
       REACT_APP_THEME_NAME: '${theme}'
       REACT_APP_NETWORK_ID: ${networkId}
+      REACT_APP_CHAIN_ID: ${chainId}
       ${options.tokenType === 'ERC20' ? '' : collectibleEnv}
     command: yarn build
     volumes:
         - frontend-assets:/app/build
   backend:
-    image: 0xorg/launch-kit-backend
+    image: 0xorg/launch-kit-backend:v3
     environment:
         HTTP_PORT: '3000'
         RPC_URL: '${options.rpcUrl}'
         NETWORK_ID: '${networkId}'
+        CHAIN_ID: '${chainId}'
         WHITELIST_ALL_TOKENS: 'true'
         FEE_RECIPIENT: '${options.feeRecipient}'
-        MAKER_FEE_ZRX_UNIT_AMOUNT: '${options.makerFee}'
-        TAKER_FEE_ZRX_UNIT_AMOUNT: '${options.takerFee}'
+        MAKER_FEE_UNIT_AMOUNT: '${options.makerFee}'
+        TAKER_FEE_UNIT_AMOUNT: '${options.takerFee}'
+        MESH_ENDPOINT: 'ws://mesh:60557'
     ports:
       - '3000:3000'
+  mesh:
+    image: 0xorg/mesh:0xV3
+    restart: always
+    environment:
+        ETHEREUM_RPC_URL: '${options.rpcUrl}'
+        ETHEREUM_CHAIN_ID: '${chainId}'
+        ETHEREUM_NETWORK_ID: '${networkId}'
+        USE_BOOTSTRAP_LIST: 'true'
+        VERBOSITY: 3
+        PRIVATE_KEY_PATH: ''
+        BLOCK_POLLING_INTERVAL: '5s'
+        P2P_LISTEN_PORT: '60557'
+        RPC_ADDR: 0.0.0.0:60557
+    ports:
+        - '60557:60557'
   nginx:
     image: nginx
     ports:
