@@ -5,6 +5,7 @@ export interface BuildOptions {
     network: Network;
     rpcUrl: string;
     relayerUrl: string;
+    relayerWebsocketUrl: string;
     feeRecipient: string;
     theme: 'light' | 'dark';
     port: number;
@@ -73,6 +74,7 @@ services:${isGanache ? ganacheService : ''}
     image: 0xorg/launch-kit-frontend:latest
     environment:
       REACT_APP_RELAYER_URL: '${options.relayerUrl}'
+      REACT_APP_RELAYER_WS_URL: '${options.relayerWebsocketUrl}'
       REACT_APP_DEFAULT_BASE_PATH: '${basePath}'
       REACT_APP_THEME_NAME: '${theme}'
       REACT_APP_NETWORK_ID: ${networkId}

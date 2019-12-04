@@ -143,6 +143,16 @@ async function main() {
         },
         {
             type: 'input',
+            name: 'relayerWebsocketUrl',
+            message:
+                'Launch Kit will create a backend Relayer. Enter the public URL for the backend websocket or leave default:',
+            default: 'ws://localhost:3000/',
+            validate: (rpcUrl: string) => {
+                return /wss?:\/\/.+/.test(rpcUrl) ? true : 'Please enter a valid Websocket URL';
+            },
+        },
+        {
+            type: 'input',
             name: 'collectibleAddress',
             message: 'Enter the address of the collectible:',
             default: ZERO_ADDRESS,
@@ -233,6 +243,7 @@ async function main() {
         network: answers.network,
         rpcUrl,
         relayerUrl: answers.relayerUrl,
+        relayerWebsocketUrl: answers.relayerWebsocketUrl,
         feeRecipient: answers.feeRecipient || ZERO_ADDRESS,
         theme: answers.theme,
         port: answers.port,
