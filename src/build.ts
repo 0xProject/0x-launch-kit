@@ -70,7 +70,7 @@ export const buildDockerComposeYml = (options: BuildOptions) => {
 version: "3"
 services:${isGanache ? ganacheService : ''}
   frontend:
-    image: 0xorg/launch-kit-frontend:v3
+    image: 0xorg/launch-kit-frontend:latest
     environment:
       REACT_APP_RELAYER_URL: '${options.relayerUrl}'
       REACT_APP_DEFAULT_BASE_PATH: '${basePath}'
@@ -82,7 +82,7 @@ services:${isGanache ? ganacheService : ''}
     volumes:
         - frontend-assets:/app/build
   backend:
-    image: 0xorg/launch-kit-backend:v3
+    image: 0xorg/launch-kit-backend:latest
     environment:
         HTTP_PORT: '3000'
         RPC_URL: '${options.rpcUrl}'
