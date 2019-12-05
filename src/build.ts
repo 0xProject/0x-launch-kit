@@ -98,20 +98,21 @@ services:${isGanache ? ganacheService : ''}
     ports:
       - '3000:3000'
   mesh:
-    image: 0xorg/mesh:0xV3
+    image: 0xorg/mesh:7-0xv3
     restart: always
     environment:
         ETHEREUM_RPC_URL: '${options.rpcUrl}'
         ETHEREUM_CHAIN_ID: '${chainId}'
-        ETHEREUM_NETWORK_ID: '${networkId}'
-        USE_BOOTSTRAP_LIST: 'true'
         VERBOSITY: 3
-        PRIVATE_KEY_PATH: ''
+        RPC_ADDR: 'mesh:60557'
+        # You can decrease the BLOCK_POLLING_INTERVAL for test networks to
+        # improve performance. See https://0x-org.gitbook.io/mesh/ for more
+        # Documentation about Mesh and its environment variables.
         BLOCK_POLLING_INTERVAL: '5s'
-        P2P_LISTEN_PORT: '60557'
-        RPC_ADDR: 0.0.0.0:60557
     ports:
         - '60557:60557'
+        - '60558:60558'
+        - '60559:60559'
   nginx:
     image: nginx
     ports:
