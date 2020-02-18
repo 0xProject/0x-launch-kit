@@ -27,7 +27,7 @@ Need help or have questions? [Join our Discord](https://discordapp.com/invite/Xv
 npx @0x/launch-kit-wizard && docker-compose up
 ```
 
-2. When Docker is done loading, open your browser to check out your new exchange. It will be running at the port you specified in the wizard (default is http://localhost:3001/)
+2. When Docker is done loading, and the frontend image is done building, open your browser to check out your new exchange. It will be running at the port you specified in the wizard (default is http://localhost:3001/)
 
 [Instructions for using Launch Kit with Ganache](https://hackmd.io/-rC79gYWRyG7h6M9jUf5qA)  
 [Instructions for deploying to AWS](https://github.com/0xProject/0x-launch-kit/wiki/FAQ#aws)
@@ -50,7 +50,7 @@ Launch a 0x relayer in under a minute with Launch Kit. This repository contains 
 Launch Kit is split into two separate repos:
 
 -   **[0x Launch Kit Frontend](https://github.com/0xProject/0x-launch-kit-frontend)**: ERC-20 and ERC-721 relayer UIs
--   **[0x Launch Kit Backend](https://github.com/0xProject/0x-launch-kit-backend)**: 0x relayer server, API, and database that powers Launch Kit
+-   **[0x API](https://github.com/0xProject/0x-api)**: An API that supports the [Standard Relayer API](https://0x.org/docs/api#sra) specification.
 
 This repo contains a Docker image that will run both codebases simultaneously for easy deployment, but you can also clone or fork each repo independently.
 
@@ -58,9 +58,9 @@ This repo contains a Docker image that will run both codebases simultaneously fo
 
 ## Language choice
 
-`0x-launch-kit-backend` ships with 2 codebases, one in Typescript and another in Javascript. Although the Javascript is auto-generated from the Typescript, we made sure the Javascript generated is readable.
+`0x-api` is a Typescript node codebase that uses Express to run an HTTP server.
 
-`0x-launch-kit-frontend` ship with just a TypeScript codebase and uses React + Thunk to create and manage the UI.
+`0x-launch-kit-frontend` is a TypeScript codebase and uses React + Thunk to create and manage the UI.
 
 ## Windows
 Note some installations of Docker on windows don't support forwarding `localhost` to the Docker VM. You may be required to update references of `localhost` to `192.168.99.100` or the `docker-machine ip` equivalent. These values should be replaced during the Wizard prompts and when navigating to the frontend website.
