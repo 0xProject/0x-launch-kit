@@ -136,7 +136,7 @@ async function main() {
             name: 'relayerUrl',
             message:
                 'Launch Kit will create a backend Relayer. Enter the public URL for the backend Relayer or leave default:',
-            default: 'http://localhost:3000/v3',
+            default: 'http://localhost:3000/sra/v3',
             validate: (rpcUrl: string) => {
                 return /https?:\/\/.+/.test(rpcUrl) ? true : 'Please enter a valid URL';
             },
@@ -146,7 +146,7 @@ async function main() {
             name: 'relayerWebsocketUrl',
             message:
                 'Launch Kit will create a backend Relayer. Enter the public URL for the backend websocket or leave default:',
-            default: 'ws://localhost:3000/',
+            default: 'ws://localhost:3000/sra/v3',
             validate: (rpcUrl: string) => {
                 return /wss?:\/\/.+/.test(rpcUrl) ? true : 'Please enter a valid Websocket URL';
             },

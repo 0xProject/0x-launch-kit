@@ -93,9 +93,9 @@ services:${isGanache ? ganacheService : ''}
         - frontend-assets:/app/build
   backend:
     image: 0xorg/0x-api:latest
-    command: yarn start:service:sra_http
     depends_on: 
         - postgres
+        - mesh
     environment:
         HTTP_PORT: '3000'
         ETHEREUM_RPC_URL: '${options.rpcUrl}'
@@ -110,7 +110,7 @@ services:${isGanache ? ganacheService : ''}
     ports:
       - '3000:3000'
   mesh:
-    image: 0xorg/mesh:8.1.1
+    image: 0xorg/mesh:9.0.1
     restart: always
     environment:
         ETHEREUM_RPC_URL: '${options.rpcUrl}'
@@ -118,7 +118,7 @@ services:${isGanache ? ganacheService : ''}
         USE_BOOTSTRAP_LIST: 'true'
         VERBOSITY: 3
         PRIVATE_KEY_PATH: ''
-        RPC_ADDR: 'mesh:60557'
+        WS_RPC_ADDR: '0.0.0.0:60557'
         # You can decrease the BLOCK_POLLING_INTERVAL for test networks to
         # improve performance. See https://0x-org.gitbook.io/mesh/ for more
         # Documentation about Mesh and its environment variables.
