@@ -105,7 +105,7 @@ services:${isGanache ? ganacheService : ''}
         FEE_RECIPIENT: '${options.feeRecipient}'
         MAKER_FEE_UNIT_AMOUNT: '${options.makerFee}'
         TAKER_FEE_UNIT_AMOUNT: '${options.takerFee}'
-        MESH_ENDPOINT: 'ws://mesh:60557'
+        MESH_WEBSOCKET_URI: 'ws://mesh:60557'
         POSTGRES_URI: 'postgresql://api:api@postgres/api'
     ports:
       - '3000:3000'
