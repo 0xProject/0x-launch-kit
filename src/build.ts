@@ -76,10 +76,6 @@ services:${isGanache ? ganacheService : ''}
         - POSTGRES_USER=api
         - POSTGRES_PASSWORD=api
         - POSTGRES_DB=api
-    # persist the postgres data to disk so we don't lose it
-    # on rebuilds.
-    volumes:
-        - ./postgres:/var/lib/postgresql/data
     ports:
         - "5432:5432"
   frontend:
