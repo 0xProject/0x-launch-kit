@@ -70,6 +70,14 @@ export const buildDockerComposeYml = (options: BuildOptions) => {
     return `
 version: "3"
 services:${isGanache ? ganacheService : ''}
+  postgres:
+    image: postgres:9.6
+    environment:
+        - POSTGRES_USER=api
+        - POSTGRES_PASSWORD=api
+        - POSTGRES_DB=api
+    ports:
+        - "5432:5432"
   frontend:
     image: 0xorg/launch-kit-frontend:latest
     environment:
@@ -84,27 +92,33 @@ services:${isGanache ? ganacheService : ''}
     volumes:
         - frontend-assets:/app/build
   backend:
-    image: 0xorg/launch-kit-backend:latest
+    image: 0xorg/0x-api:latest
+    depends_on: 
+        - postgres
+        - mesh
     environment:
         HTTP_PORT: '3000'
-        RPC_URL: '${options.rpcUrl}'
+        ETHEREUM_RPC_URL: '${options.rpcUrl}'
         NETWORK_ID: '${networkId}'
         CHAIN_ID: '${chainId}'
         WHITELIST_ALL_TOKENS: 'true'
         FEE_RECIPIENT: '${options.feeRecipient}'
         MAKER_FEE_UNIT_AMOUNT: '${options.makerFee}'
         TAKER_FEE_UNIT_AMOUNT: '${options.takerFee}'
-        MESH_ENDPOINT: 'ws://mesh:60557'
+        MESH_WEBSOCKET_URI: 'ws://mesh:60557'
+        POSTGRES_URI: 'postgresql://api:api@postgres/api'
     ports:
       - '3000:3000'
   mesh:
-    image: 0xorg/mesh:7-0xv3
+    image: 0xorg/mesh:9.0.1
     restart: always
     environment:
         ETHEREUM_RPC_URL: '${options.rpcUrl}'
         ETHEREUM_CHAIN_ID: '${chainId}'
+        USE_BOOTSTRAP_LIST: 'true'
         VERBOSITY: 3
-        RPC_ADDR: 'mesh:60557'
+        PRIVATE_KEY_PATH: ''
+        WS_RPC_ADDR: '0.0.0.0:60557'
         # You can decrease the BLOCK_POLLING_INTERVAL for test networks to
         # improve performance. See https://0x-org.gitbook.io/mesh/ for more
         # Documentation about Mesh and its environment variables.
