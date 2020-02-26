@@ -30,6 +30,7 @@ npx @0x/launch-kit-wizard && docker-compose up
 2. When Docker is done loading, and the frontend image is done building, open your browser to check out your new exchange. It will be running at the port you specified in the wizard (default is http://localhost:3001/)
 
 [Instructions for using Launch Kit with Ganache](https://github.com/0xProject/0x-launch-kit/wiki/FAQ#development-with-ganache)
+
 [Instructions for deploying to AWS](https://github.com/0xProject/0x-launch-kit/wiki/FAQ#aws)
 
 ## Table of contents
