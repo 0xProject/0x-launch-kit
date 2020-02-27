@@ -106,6 +106,7 @@ services:${isGanache ? ganacheService : ''}
         MAKER_FEE_UNIT_AMOUNT: '${options.makerFee}'
         TAKER_FEE_UNIT_AMOUNT: '${options.takerFee}'
         MESH_WEBSOCKET_URI: 'ws://mesh:60557'
+        MESH_HTTP_URI: 'http://mesh:60556'
         POSTGRES_URI: 'postgresql://api:api@postgres/api'
     ports:
       - '3000:3000'
@@ -119,11 +120,13 @@ services:${isGanache ? ganacheService : ''}
         VERBOSITY: 3
         PRIVATE_KEY_PATH: ''
         WS_RPC_ADDR: '0.0.0.0:60557'
+        HTTP_RPC_ADDR: '0.0.0.0:60556'
         # You can decrease the BLOCK_POLLING_INTERVAL for test networks to
         # improve performance. See https://0x-org.gitbook.io/mesh/ for more
         # Documentation about Mesh and its environment variables.
         BLOCK_POLLING_INTERVAL: '5s'
     ports:
+        - '60556:60556'
         - '60557:60557'
         - '60558:60558'
         - '60559:60559'
