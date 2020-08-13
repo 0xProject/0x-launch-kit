@@ -1,5 +1,10 @@
 # 0x Launch Kit: Build an Exchange in Under a Minute 🚀📈
 
+## ⚠️ Deprecation Warning ️️⚠️
+
+This project is no longer being actively maintained. 
+To fork or run a [Standard Relayer API](https://0x.org/docs/api#sra) instance, you can use the [0x API](https://github.com/0xProject/0x-api) instead.
+
 |                              ERC-20                              |                              ERC-721                              |
 | :--------------------------------------------------------------: | :---------------------------------------------------------------: |
 | ![](https://s3.eu-west-2.amazonaws.com/0x-wiki-images/erc20.png) | ![](https://s3.eu-west-2.amazonaws.com/0x-wiki-images/erc721.png) |
