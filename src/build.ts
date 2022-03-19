@@ -79,7 +79,7 @@ services:${isGanache ? ganacheService : ''}
     ports:
         - "5432:5432"
   frontend:
-    image: 0xorg/launch-kit-frontend:latest
+    image: kubeworkz/kubedex-frontend:latest
     environment:
       REACT_APP_RELAYER_URL: '${options.relayerUrl}'
       REACT_APP_RELAYER_WS_URL: '${options.relayerWebsocketUrl}'
